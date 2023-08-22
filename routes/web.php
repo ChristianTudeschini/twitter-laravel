@@ -16,12 +16,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    // Gets all tweets from the current user
+    //$tweets = Tweet::where('user_id', auth()->id())->get();
+
+    $tweets = [];
+    if (auth()->check()) {
+        $tweets = auth()->user()->usersTweets()->latest()->get();
+    }
+
+    return view('home', ['tweets' => $tweets]);
 });
 
+// User Routes
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 // Tweet Routes
 Route::post('/create-tweet', [TweetController::class, 'createTweet']);
+Route::get('/edit-tweet/{tweet}', [TweetController::class, 'showEditScreen']);
+Route::put('/edit-tweet/{tweet}', [TweetController::class, 'editTweet']);
+Route::delete('/delete-tweet/{tweet}', [TweetController::class, 'deleteTweet']);
