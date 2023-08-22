@@ -42,4 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function usersTweets() {
+        return $this->hasMany(Tweet::class, 'user_id');
+    }
 }

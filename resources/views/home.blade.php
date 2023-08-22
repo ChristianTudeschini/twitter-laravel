@@ -18,10 +18,24 @@
       <h2>Create a new Tweet:</h2>
       <form action="/create-tweet" method="POST">
         @csrf
-        <input type="text" name="title" placeholder="tweet title">
-        <textarea name="body" placeholder="body content..."></textarea>
-        <button>Save Tweet</button>
+        <textarea name="body" placeholder="What's happening?"></textarea>
+        <button>Tweet</button>
       </form>
+    </div>
+
+    <div style="border: 3px solid black;">
+      <h2>Tweets:</h2>
+      @foreach ($tweets as $tweet)
+          <div style="background: gray; padding: 5px; margin: 5px">
+            {{$tweet['body']}}
+            <p><a href="/edit-tweet/{{$tweet->id}}">Edit</a></p>
+            <form action="/delete-tweet/{{$tweet->id}}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button>Delete</button>
+            </form>
+          </div>
+      @endforeach
     </div>
   @else
     <div style="border: 3px solid black;">
