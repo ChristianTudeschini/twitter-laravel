@@ -28,6 +28,7 @@
       @foreach ($tweets as $tweet)
           <div style="background: gray; padding: 5px; margin: 5px">
             {{$tweet['body']}}
+            <h6>by: {{$tweet->user->name}}</h6>
             <p><a href="/edit-tweet/{{$tweet->id}}">Edit</a></p>
             <form action="/delete-tweet/{{$tweet->id}}" method="POST">
               @csrf
