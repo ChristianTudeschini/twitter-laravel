@@ -7,7 +7,7 @@
   <title>Edit Tweet</title>
 </head>
 <body>
-  <h1>Edit Tweet</h1>
+  <h1>Edit</h1>
   <form action="/edit-tweet/{{$tweet->id}}" method="POST">
     @csrf
     @method('PUT')
